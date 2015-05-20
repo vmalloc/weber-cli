@@ -5,7 +5,12 @@ from setuptools import setup, find_packages
 with open(os.path.join(os.path.dirname(__file__), "weber", "__version__.py")) as version_file:
     exec(version_file.read()) # pylint: disable=W0122
 
-_INSTALL_REQUIRES = []
+_INSTALL_REQUIRES = [
+    'Jinja2',
+]
+
+if sys.version_info < (3, 0):
+    _INSTALL_REQUIRES.append('contextlib2')
 
 setup(name="weber",
       classifiers = [
