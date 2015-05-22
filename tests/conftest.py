@@ -1,12 +1,29 @@
 # put py.test fixtures here
 import pytest
 
+from .utils.cli_wrapper import CLIWrapper
+from .utils.testserver import TestServer
+
 
 @pytest.fixture
-def text1():
-    return """This is a
-    multiline
-    text\t\t/# with
-    Some ' Special
-    " characters
-    """
+def cli(request):
+    returned = CLIWrapper()
+    request.addfinalizer(returned.terminate_all)
+    return returned
+
+
+@pytest.fixture
+def testserver():
+    return TestServer()
+
+
+@pytest.fixture
+def init_dir(tmpdir, app_name, cli):
+    returned = tmpdir.join('project')
+    cli.run(['init', returned, '--app-name', app_name])
+    return returned
+
+
+@pytest.fixture
+def app_name():
+    return 'some_app_name'

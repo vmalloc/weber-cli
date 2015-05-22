@@ -1,1 +1,5 @@
 pytest
+pytest-xdist
+pytest-capturelog
+pytest-cov
+pytest-timeout

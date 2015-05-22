@@ -6,7 +6,13 @@ with open(os.path.join(os.path.dirname(__file__), "weber", "__version__.py")) as
     exec(version_file.read()) # pylint: disable=W0122
 
 _INSTALL_REQUIRES = [
+    'click>=4.0',
+    'Flask',
+    'Logbook',
     'Jinja2',
+    'PyYAML',
+    'requests',
+    'watchdog',
 ]
 
 if sys.version_info < (3, 0):
@@ -31,5 +37,10 @@ setup(name="weber",
 
       install_requires=_INSTALL_REQUIRES,
       scripts=[],
-      namespace_packages=[]
+      namespace_packages=[],
+      entry_points={
+          'console_scripts': {
+              'weber=weber.cli.weber:main',
+              },
+          },
       )
