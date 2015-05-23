@@ -1,6 +1,7 @@
 # put py.test fixtures here
 import pytest
 import py
+import os
 
 from .utils.cli_wrapper import CLIWrapper
 from .utils.deployment import deploy_testserver, Deployment
