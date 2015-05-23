@@ -7,7 +7,7 @@ def test_created(init_dir):
 
 
 def test_app_name_in_yaml(init_dir, app_name):
-    with init_dir.join('weber.yml').open() as f:
+    with init_dir.join('weber_config.yml').open() as f:
         yml = yaml.load(f)
     assert yml['app']['name'] == app_name
 

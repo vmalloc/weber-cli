@@ -7,9 +7,11 @@ with open(os.path.join(os.path.dirname(__file__), "weber", "__version__.py")) as
 
 _INSTALL_REQUIRES = [
     'click>=4.0',
+    'emport',
     'Flask',
     'Logbook',
     'Jinja2',
+    'py',
     'PyYAML',
     'requests',
     'watchdog',

@@ -1,5 +1,4 @@
 import os
-import subprocess
 import sys
 
 from click.testing import CliRunner as ClickRunner
@@ -13,18 +12,13 @@ class CLIWrapper(object):
         self._running = []
 
     def run(self, argv, assert_success=True, cwd=None):
+        args = [str(x) for x in argv]
+        if cwd is not None:
+            args = ['-w', cwd] + args
         try:
-            main.main(args=[str(x) for x in argv])
+            main.main(args=args)
         except SystemExit as e:
-            return e.code
+            assert e.code == 0
         else:
             assert False, 'Not finished'
 
-    def start_process(self, args, cwd):
-        p = subprocess.Popen([os.path.join(os.path.dirname(sys.executable), 'weber')] + map(str, args), cwd=str(cwd))
-        self._running.append(p)
-        return p
-
-    def terminate_all(self):
-        for p in self._running:
-            p.terminate()
